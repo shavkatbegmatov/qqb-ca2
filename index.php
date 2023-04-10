@@ -5,9 +5,9 @@ session_start();
 require 'connect/db.php';
 
 if (!isset($_SESSION['user'])) {
-    header('Location: http://project.loc/auth.php');
+    header('Location: ' . ROOT . 'auth.php');
 } else if ($_SESSION['user']['role'] == 'admin') {
-    header('Location: http://project.loc/admin');
+    header('Location: ' . ROOT . 'admin');
 }
 
 ?>
@@ -29,39 +29,53 @@ if (!isset($_SESSION['user'])) {
 
 <body>
     <div class="ui container">
-        <div class="ui divider"></div>
-        <div class="ui divided grid">
-            <div class="eight wide column">
-                <p>Банк: <a href="#"><b>ТОШКЕНТ Ш., АТБ "КИШЛОК КУРИЛИШ БАНК" БОШ АМАЛИЁТЛАР</b></a></p>
-                <p>Клиент: <a href="#"><b><?php echo $_SESSION['user']['username']; ?> <?php echo $_SESSION['user']['name']; ?></a></b></p>
+        <a class="ui tiny right floated red button" href="/">
+            Выйти
+        </a>
+		<div class="ui text menu">
+            <div class="item" style="width:72px;height:72px;margin-right:48px;">
+                <img style="width:72px;height:72px;" src="https://manage.qishloqqurilishbank.uz/storage/logo-1620275124bYllR.jpg">
             </div>
-            <div class="eight wide column" style="text-align:right;">
-                <p>Операционный день: <b>31.03.2023</b> <span class="ui black horizontal label">Открыт</span></p>
-                <p>Дата последнего входа: <span class="ui black horizontal label">31.03.2023 16:46:53</span></p>
-            </div>
+            <div class="ui item">
+                <div style="text-align:left;">
+					<div style="display:block;">
+						<p>Банк: <a href="#"><b>ТОШКЕНТ Ш., АТБ "КИШЛОК КУРИЛИШ БАНК" БОШ АМАЛИЁТЛАР</b></a></p>
+					</div>
+					<br>
+					<div style="display:block;">
+						<p>Клиент: <a href="#"><b><?php echo $_SESSION['user']['username']; ?> <?php echo $_SESSION['user']['name']; ?></a></b></p>
+					</div>
+        		</div>
+			</div>
+			<div class="ui item">
+                <div style="text-align:left;">
+					<div style="display:block;">
+						<p>Операционный день: <b>31.03.2023</b> <span class="ui black horizontal label">Открыт</span></p>
+					</div>
+					<br>
+					<div style="display:block;">
+						<p>Дата последнего входа: <span class="ui black horizontal label">31.03.2023 16:46:53</span></p>
+					</div>
+        		</div>
+			</div>	
         </div>
-
-        <div class="ui divider"></div>
-        <a href="zayavka.php" class="ui button">Заявка</a>
-        <a href="logout.php" class="ui red button">Выйти</a>
-        <div class="ui divider"></div>
 
         <div class="ui fluid ordered steps">
             <div class="active step" id="firstStep">
                 <div class="content">
-                    <div class="title">Кредит тури</div>
+                    <div class="title">Тип кредита</div>
                     <div class="description">Choose your shipping options</div>
                 </div>
             </div>
             <div class="step" id="secondStep">
                 <div class="content">
-                    <div class="title">Малумот</div>
+                    <div class="title">Данные</div>
                     <div class="description">Enter billing information</div>
                 </div>
             </div>
             <div class="step" id="thirdStep">
                 <div class="content">
-                    <div class="title">Докуметлар</div>
+                    <div class="title">Документы</div>
                     <div class="description">Verify order details</div>
                 </div>
             </div>
@@ -80,7 +94,7 @@ if (!isset($_SESSION['user'])) {
                         <div class="content">
                             <div class="header"><?php echo $type['name']; ?></div>
                             <div class="meta">
-                                <a>Кредит тури</a>
+                                <a>Тип кредита</a>
                             </div>
                         </div>
                     </div>
@@ -90,19 +104,19 @@ if (!isset($_SESSION['user'])) {
 
         <div class="ui huge form sendForm">
             <div class="ui fluid field">
-                <label>Кредит максади</label>
+                <label>Причина кредита</label>
                 <input id="cr_purpose" type="text">
             </div>
             <div class="ui fluid field">
-                <label>Кредит суммаси</label>
+                <label>Сумма кредита</label>
                 <input id="cr_sum" type="number">
             </div>
             <div class="ui fluid field">
-                <label>Кредит муддати</label>
+                <label>Период кредита</label>
                 <input id="cr_period" type="number">
             </div>
 
-            <button class="huge ui fluid button black" id="send">Кейингиси</button>
+            <button class="huge ui fluid button black" id="send">Далее</button>
         </div>
 
         <div class="ui huge form uploadForm">
@@ -113,12 +127,12 @@ if (!isset($_SESSION['user'])) {
                         <div class="ui file action input">
                             <input id="cr_file_1" class="docInput" type="file">
                             <label id="cr_file_1_label" for="cr_file_1" class="ui huge black button docInputLabel">
-                                Танлаш
+                                Выбрать
                             </label>
                         </div>
                     </div>
                     <div class="two wide field">
-                        <button class="ui huge button" id="cr_file_1_button" onclick="uploadFileAjax('cr_file_1');">Юклаш</button>
+                        <button class="ui huge button" id="cr_file_1_button" onclick="uploadFileAjax('cr_file_1');">Загрузить</button>
                     </div>
                 </div>
             </div>
@@ -129,12 +143,12 @@ if (!isset($_SESSION['user'])) {
                         <div class="ui file action input">
                             <input id="cr_file_2" class="docInput" type="file">
                             <label id="cr_file_2_label" for="cr_file_2" class="ui huge black button docInputLabel">
-                                Танлаш
+                                Выбрать
                             </label>
                         </div>
                     </div>
                     <div class="two wide field">
-                        <button class="ui huge button" id="cr_file_2_button" onclick="uploadFileAjax('cr_file_2');">Юклаш</button>
+                        <button class="ui huge button" id="cr_file_2_button" onclick="uploadFileAjax('cr_file_2');">Загрузить</button>
                     </div>
                 </div>
             </div>
@@ -145,12 +159,12 @@ if (!isset($_SESSION['user'])) {
                         <div class="ui file action input">
                             <input id="cr_file_3" class="docInput" type="file">
                             <label id="cr_file_3_label" for="cr_file_3" class="ui huge black button docInputLabel">
-                                Танлаш
+                                Выбрать
                             </label>
                         </div>
                     </div>
                     <div class="two wide field">
-                        <button class="ui huge button" id="cr_file_3_button" onclick="uploadFileAjax('cr_file_3');">Юклаш</button>
+                        <button class="ui huge button" id="cr_file_3_button" onclick="uploadFileAjax('cr_file_3');">Загрузить</button>
                     </div>
                 </div>
             </div>
@@ -161,12 +175,12 @@ if (!isset($_SESSION['user'])) {
                         <div class="ui file action input">
                             <input id="cr_file_4" class="docInput" type="file">
                             <label id="cr_file_4_label" for="cr_file_4" class="ui huge black button docInputLabel">
-                                Танлаш
+                                Выбрать
                             </label>
                         </div>
                     </div>
                     <div class="two wide field">
-                        <button class="ui huge button" id="cr_file_4_button" onclick="uploadFileAjax('cr_file_4');">Юклаш</button>
+                        <button class="ui huge button" id="cr_file_4_button" onclick="uploadFileAjax('cr_file_4');">Загрузить</button>
                     </div>
                 </div>
             </div>
@@ -177,12 +191,12 @@ if (!isset($_SESSION['user'])) {
                         <div class="ui file action input">
                             <input id="cr_file_5" class="docInput" type="file">
                             <label id="cr_file_5_label" for="cr_file_5" class="ui huge black button docInputLabel">
-                                Танлаш
+                                Выбрать
                             </label>
                         </div>
                     </div>
                     <div class="two wide field">
-                        <button class="ui huge button" id="cr_file_5_button" onclick="uploadFileAjax('cr_file_5');">Юклаш</button>
+                        <button class="ui huge button" id="cr_file_5_button" onclick="uploadFileAjax('cr_file_5');">Загрузить</button>
                     </div>
                 </div>
             </div>
@@ -193,29 +207,29 @@ if (!isset($_SESSION['user'])) {
                         <div class="ui file action input">
                             <input id="cr_file_6" class="docInput" type="file">
                             <label id="cr_file_6_label" for="cr_file_6" class="ui huge black button docInputLabel">
-                                Танлаш
+                                Выбрать
                             </label>
                         </div>
                     </div>
                     <div class="two wide field">
-                        <button class="ui huge button" id="cr_file_6_button" onclick="uploadFileAjax('cr_file_6');">Юклаш</button>
+                        <button class="ui huge button" id="cr_file_6_button" onclick="uploadFileAjax('cr_file_6');">Загрузить</button>
                     </div>
                 </div>
             </div>
-            <button class="huge ui fluid button black" id="upload">Кейингиси</button>
+            <button class="huge ui fluid button black" id="upload">Далее</button>
         </div>
 
 
         <div class="completedText">
-            <h1>Сизнинг формангиз банкка юборилди</h1>
+            <h1>Все верно заполнено?</h1>
 
-            <p>Кредит тури: <span id="preview-cr-type"></span></p><br>
-            <p>Кредит максади: <span id="preview-cr-purpose"></span></p><br>
-            <p>Кредит суммаси: <span id="preview-cr-sum"></span></p><br>
-            <p>Кредит муддати: <span id="preview-cr-period"></span></p><br>
+            <p>Тип кредита: <span id="preview-cr-type"></span></p><br>
+            <p>Причина кредита: <span id="preview-cr-purpose"></span></p><br>
+            <p>Сумма кредита: <span id="preview-cr-sum"></span></p><br>
+            <p>Период кредита: <span id="preview-cr-period"></span></p><br>
 
-            <button class="ui red button" id="cancel_button">Бекор килиш</button>
-            <button class="ui green button" id="confirm_button">Тугри, тастиклаш</button>
+            <button class="ui red button" id="cancel_button">Отменить</button>
+            <button class="ui green button" id="confirm_button">Отправить</button>
         </div>
     </div>
 
@@ -271,7 +285,7 @@ if (!isset($_SESSION['user'])) {
                     }
                 });
             } else {
-                alert2('Oldin faylni tanlang!');
+                alert2('Сначала выберите документ!');
             }
         }
 
@@ -301,12 +315,12 @@ if (!isset($_SESSION['user'])) {
                     }
                 });
             } else {
-                alert2('Oldin hamma narsani toldiring!');
+                alert2('Сначала заполните все!');
             }
         });
 
         $('#cancel_button').on('click', function() {
-            window.location.href = 'http://project.loc/';
+            window.location.href = '<?php echo ROOT; ?>';
         });
 
         $('#confirm_button').on('click', function() {
@@ -318,16 +332,16 @@ if (!isset($_SESSION['user'])) {
                 },
                 type: 'post',
                 success: function(php_script_response) {
-                    alert2('Тастикланди!');
+                    alert2('Отправлено!');
 
-                    window.location.href = 'http://project.loc/';
+                    window.location.href = '<?php echo ROOT; ?>';
                 }
             });
         });
 
         $('#upload').on('click', function() {
             if (uploadedCount < 6) {
-                alert2('Hamma faylarni yuklang');
+                alert2('Загрузите все документы!');
             } else {
                 $('#thirdStep').removeClass('active');
                 $('#thirdStep').addClass('completed');

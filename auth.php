@@ -11,9 +11,9 @@ if (!empty($_POST)) {
         $_SESSION['user']['id'] = $user['id'];
         $_SESSION['user']['role'] = $user['role'];
 
-        header('Location: http://project.loc/');
+        header('Location: ' . ROOT);
     } else {
-        echo 'Неправильная!';
+        echo 'Неправильно!';
     }
 }
 

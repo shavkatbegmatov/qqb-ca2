@@ -5,10 +5,10 @@ require '../connect/db.php';
 session_start();
 
 if (!isset($_SESSION['user'])) {
-	header('Location: http://project.loc/auth.php');
+	header('Location: ' . ROOT . 'auth.php');
 } else {
 	if ($_SESSION['user']['role'] != 'admin') {
-		header('Location: http://project.loc/auth.php');
+		header('Location: ' . ROOT . 'auth.php');
 	}
 }
 
@@ -32,19 +32,50 @@ $credits = R::findAll('credit');
 
 <body>
 	<div class="ui container">
-		<div class="ui divider"></div>
-		<a href="../logout.php" class="ui red button">Выйти</a>
+		<a class="ui tiny right floated red button" href="/">
+            Выйти
+        </a>
+		<div class="ui text menu">
+            <div class="item" style="width:72px;height:72px;margin-right:48px;">
+                <img style="width:72px;height:72px;" src="https://manage.qishloqqurilishbank.uz/storage/logo-1620275124bYllR.jpg">
+            </div>
+            <div class="ui item">
+                <div style="text-align:left;">
+					<div style="display:block;">
+						<p>Банк: <a href="#"><b>ТОШКЕНТ Ш., АТБ "КИШЛОК КУРИЛИШ БАНК" БОШ АМАЛИЁТЛАР</b></a></p>
+					</div>
+					<br>
+					<div style="display:block;">
+						<p>Клиент: <a href="#"><b><?php echo $_SESSION['user']['username']; ?> <?php echo $_SESSION['user']['name']; ?></a></b></p>
+					</div>
+        		</div>
+			</div>
+			<div class="ui item">
+                <div style="text-align:left;">
+					<div style="display:block;">
+						<p>Операционный день: <b>31.03.2023</b> <span class="ui black horizontal label">Открыт</span></p>
+					</div>
+					<br>
+					<div style="display:block;">
+						<p>Дата последнего входа: <span class="ui black horizontal label">31.03.2023 16:46:53</span></p>
+					</div>
+        		</div>
+			</div>	
+        </div>
+
 		<div class="ui divider"></div>
 		<table class="ui celled table">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Фирма</th>
-					<th>Кредит тури</th>
-					<th>Кредит максади</th>
-					<th>Кредит суммаси</th>
-					<th>Кредит муддати (ой)</th>
+					<th>Компания</th>
+					<th>Тип кредита</th>
+					<th>Причина кредита</th>
+					<th>Сумма кредита</th>
+					<th>Период кредита</th>
 					<th>Статус</th>
+					<th>Причина (отказа/согласия)</th>
+					<th>Сотрудник</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -59,11 +90,17 @@ $credits = R::findAll('credit');
 							<td><?php echo number_format($credit['credit_sum']); ?></td>
 							<td><?php echo $credit['credit_period']; ?></td>
 							<td><?php echo $credit['status']; ?></td>
+							<td><?php echo $credit['status_text']; ?></td>
+							<td><?php echo $credit['checked_id']; ?></td>
 							<td>
-								<button class="ui button" onclick="docs(<?php echo $credit['id']; ?>)">Документлар</button>
+								<button class="ui button" onclick="docs(<?php echo $credit['id']; ?>)">Документы</button>
 								<?php if ($credit['status'] == 'yuborilgan') : ?>
-									<a class="ui green button" href="http://project.loc/admin/confirm.php?id=<?php echo $credit['id']; ?>">ТАСТИКЛАШ</a>
-									<a class="ui red button" href="http://project.loc/admin/cancel.php?id=<?php echo $credit['id']; ?>">РАД ЭТИШ</a>
+									<br>
+									<br>
+									<div class="ui vertical buttons">
+										<a class="ui green button" href="http://project.loc/admin/confirm.php?id=<?php echo $credit['id']; ?>">Одобрить</a>
+										<a class="ui red button" href="http://project.loc/admin/cancel.php?id=<?php echo $credit['id']; ?>">Отказать</a>
+									</div>
 								<?php endif; ?>
 							</td>
 						</tr>
@@ -74,7 +111,7 @@ $credits = R::findAll('credit');
 
 		<div class="ui modal">
 			<i class="close icon"></i>
-			<div class="header">Документлар</div>
+			<div class="header">Документы</div>
 			<div class="content">
 				<div class="ui form files">
 					<div class="ui inline field">

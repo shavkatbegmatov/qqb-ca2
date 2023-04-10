@@ -5,7 +5,7 @@ session_start();
 require 'connect/db.php';
 
 if (!isset($_SESSION['user'])) {
-	header('Location: http://project.loc/auth.php');
+	header('Location: ' . ROOT . 'auth.php');
 }
 
 $credits = R::findAll('credit', 'client_id = ?', [$_SESSION['user']['id']]);
@@ -30,7 +30,7 @@ $credits = R::findAll('credit', 'client_id = ?', [$_SESSION['user']['id']]);
 		<div class="ui divider"></div>
 		<a href="index.php" class="ui button">Главная</a>
 		<div class="ui divider"></div>
-		<table class="ui celled table">
+				<table class="ui celled table">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -40,6 +40,8 @@ $credits = R::findAll('credit', 'client_id = ?', [$_SESSION['user']['id']]);
 					<th>Кредит суммаси</th>
 					<th>Кредит муддати (ой)</th>
 					<th>Статус</th>
+					<th>Статус сабаби</th>
+					<th>Текширган одам</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,6 +55,8 @@ $credits = R::findAll('credit', 'client_id = ?', [$_SESSION['user']['id']]);
 							<td><?php echo number_format($credit['credit_sum']); ?></td>
 							<td><?php echo $credit['credit_period']; ?></td>
 							<td><?php echo $credit['status']; ?></td>
+							<td><?php echo $credit['status_text']; ?></td>
+							<td><?php echo $credit['checked_id']; ?></td>
 						</tr>
 					<?php endif; ?>
 				<?php endforeach; ?>

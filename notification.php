@@ -5,7 +5,7 @@ session_start();
 require 'connect/db.php';
 
 if (!isset($_SESSION['user'])) {
-	header('Location: http://project.loc/auth.php');
+	header('Location: ' . ROOT . 'auth.php');
 }
 
 $notifications = R::findAll('notification', 'user_id = ?', [$_SESSION['user']['id']]);
