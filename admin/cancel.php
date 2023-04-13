@@ -16,7 +16,7 @@ if (!empty($_POST)) {
     $notification['text'] = 'Ваш ' . $_GET['id'] . '-ый кредит отказан :(';
     R::store($notification);
     
-    header('Location: index.php');
+    header('Location: ' . ROOT . 'index.php');
 }
 
 

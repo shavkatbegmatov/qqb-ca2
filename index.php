@@ -21,10 +21,10 @@ if (!isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajax Upload</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js" integrity="sha512-5cguXwRllb+6bcc2pogwIeQmQPXEzn2ddsqAexIBhh7FO1z5Hkek1J9mrK2+rmZCTU6b6pERxI7acnp1MpAg4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/qqb-ca/assets/jquery.min.js"></script>
+    <script src="/qqb-ca/assets/semantic.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css" integrity="sha512-n//BDM4vMPvyca4bJjZPDh7hlqsQ7hqbP9RH18GF2hTXBY5amBwM2501M0GPiwCU/v9Tor2m13GOTFjk00tkQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/qqb-ca/assets/semantic.min.css" />
 </head>
 
 <body>
@@ -32,32 +32,32 @@ if (!isset($_SESSION['user'])) {
         <a class="ui tiny right floated red button" href="/">
             Выйти
         </a>
-		<div class="ui text menu">
+        <div class="ui text menu">
             <div class="item" style="width:72px;height:72px;margin-right:48px;">
-                <img style="width:72px;height:72px;" src="https://manage.qishloqqurilishbank.uz/storage/logo-1620275124bYllR.jpg">
+                <img style="width:72px;height:72px;" src="/qqb-ca/assets/logo_qqb.jpg">
             </div>
             <div class="ui item">
                 <div style="text-align:left;">
-					<div style="display:block;">
-						<p>Банк: <a href="#"><b>ТОШКЕНТ Ш., АТБ "КИШЛОК КУРИЛИШ БАНК" БОШ АМАЛИЁТЛАР</b></a></p>
-					</div>
-					<br>
-					<div style="display:block;">
-						<p>Клиент: <a href="#"><b><?php echo $_SESSION['user']['username']; ?> <?php echo $_SESSION['user']['name']; ?></a></b></p>
-					</div>
-        		</div>
-			</div>
-			<div class="ui item">
+                    <div style="display:block;">
+                        <p>Банк: <a href="#"><b>ТОШКЕНТ Ш., АТБ "КИШЛОК КУРИЛИШ БАНК" БОШ АМАЛИЁТЛАР</b></a></p>
+                    </div>
+                    <br>
+                    <div style="display:block;">
+                        <p>Клиент: <a href="#"><b><?php echo $_SESSION['user']['username']; ?> <?php echo $_SESSION['user']['name']; ?></a></b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="ui item">
                 <div style="text-align:left;">
-					<div style="display:block;">
-						<p>Операционный день: <b>31.03.2023</b> <span class="ui black horizontal label">Открыт</span></p>
-					</div>
-					<br>
-					<div style="display:block;">
-						<p>Дата последнего входа: <span class="ui black horizontal label">31.03.2023 16:46:53</span></p>
-					</div>
-        		</div>
-			</div>	
+                    <div style="display:block;">
+                        <p>Операционный день: <b>31.03.2023</b> <span class="ui black horizontal label">Открыт</span></p>
+                    </div>
+                    <br>
+                    <div style="display:block;">
+                        <p>Дата последнего входа: <span class="ui black horizontal label">31.03.2023 16:46:53</span></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="ui fluid ordered steps">
@@ -89,7 +89,7 @@ if (!isset($_SESSION['user'])) {
                 <?php foreach ($types as $type) : ?>
                     <div class="card" id="<?php echo $type['id']; ?>">
                         <div class="image">
-                            <img src="http://static.norma.uz/images/187798_866a38f2063f4406cb5eb4263a71.jpg">
+                            <img src="/qqb-ca/assets/img11.jpg">
                         </div>
                         <div class="content">
                             <div class="header"><?php echo $type['name']; ?></div>

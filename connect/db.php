@@ -1,8 +1,8 @@
 <?php
 
 $db = require 'conf.php';
-require 'rb.php';
+require 'rb-mysql.php';
 
-const ROOT = 'http://project.loc/';
+const ROOT = '/qqb-ca/';
 
 R::setup($db['dsn'], $db['user'], $db['pass']);

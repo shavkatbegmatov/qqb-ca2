@@ -33,14 +33,14 @@ $credits = R::findAll('credit');
 <body>
 	<div class="ui container">
 		<a class="ui tiny right floated red button" href="/">
-            Выйти
-        </a>
+			Выйти
+		</a>
 		<div class="ui text menu">
-            <div class="item" style="width:72px;height:72px;margin-right:48px;">
-                <img style="width:72px;height:72px;" src="https://manage.qishloqqurilishbank.uz/storage/logo-1620275124bYllR.jpg">
-            </div>
-            <div class="ui item">
-                <div style="text-align:left;">
+			<div class="item" style="width:72px;height:72px;margin-right:48px;">
+				<img style="width:72px;height:72px;" src="https://manage.qishloqqurilishbank.uz/storage/logo-1620275124bYllR.jpg">
+			</div>
+			<div class="ui item">
+				<div style="text-align:left;">
 					<div style="display:block;">
 						<p>Банк: <a href="#"><b>ТОШКЕНТ Ш., АТБ "КИШЛОК КУРИЛИШ БАНК" БОШ АМАЛИЁТЛАР</b></a></p>
 					</div>
@@ -48,10 +48,10 @@ $credits = R::findAll('credit');
 					<div style="display:block;">
 						<p>Клиент: <a href="#"><b><?php echo $_SESSION['user']['username']; ?> <?php echo $_SESSION['user']['name']; ?></a></b></p>
 					</div>
-        		</div>
+				</div>
 			</div>
 			<div class="ui item">
-                <div style="text-align:left;">
+				<div style="text-align:left;">
 					<div style="display:block;">
 						<p>Операционный день: <b>31.03.2023</b> <span class="ui black horizontal label">Открыт</span></p>
 					</div>
@@ -59,9 +59,9 @@ $credits = R::findAll('credit');
 					<div style="display:block;">
 						<p>Дата последнего входа: <span class="ui black horizontal label">31.03.2023 16:46:53</span></p>
 					</div>
-        		</div>
-			</div>	
-        </div>
+				</div>
+			</div>
+		</div>
 
 		<div class="ui divider"></div>
 		<table class="ui celled table">
@@ -98,8 +98,8 @@ $credits = R::findAll('credit');
 									<br>
 									<br>
 									<div class="ui vertical buttons">
-										<a class="ui green button" href="http://project.loc/admin/confirm.php?id=<?php echo $credit['id']; ?>">Одобрить</a>
-										<a class="ui red button" href="http://project.loc/admin/cancel.php?id=<?php echo $credit['id']; ?>">Отказать</a>
+										<a class="ui green button" href="<?php echo ROOT ?>admin/confirm.php?id=<?php echo $credit['id']; ?>">Одобрить</a>
+										<a class="ui red button" href="<?php echo ROOT ?>/admin/cancel.php?id=<?php echo $credit['id']; ?>">Отказать</a>
 									</div>
 								<?php endif; ?>
 							</td>
